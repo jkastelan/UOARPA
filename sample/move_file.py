@@ -10,7 +10,6 @@ with SCPClient(ssh.get_transport()) as scp:
 
 
 def move_file():
-    Popen("gphoto2 -f -p")
     nfile = len(os.listdir("."))
 
     if nfile>0:  ## are there any files to move
@@ -36,6 +35,7 @@ def move_file():
         else 
             logging.debug("Greater than {0} files".format(os.environ('NMAX')))
             #DELETE ALL FILES IN ORIGIN?
-       
-        #Close the connection
-        scp.close()
+    return
+
+#Close the connection
+scp.close()
