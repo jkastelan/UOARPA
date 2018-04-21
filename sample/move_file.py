@@ -8,7 +8,7 @@ import sys
 #ssh.load_systen_host_keys()
 #with SCPClient(ssh.get_transport()) as scp:
 
-#needs irigin file env variable ORGN
+#needs origin file env variable ORGN
 if os.getenv("ORGN") is None:
     print("needs env var ORGN")
     sys.exit()
@@ -17,8 +17,8 @@ if os.getenv("DSTN") is None:
     print("needs env var DSTN")    
     sys.exit()
 
-if os.getenv('NMAX') is None:
-    print ("needs NMAX")
+if os.getenv('FILEMAXN') is None:
+    print ("needs FILEMAXN")
     sys.exit()
 
 def move_file():
@@ -44,7 +44,7 @@ def move_file():
             os.remove(os.environ["ORGN"] + '/' + firstfile)
             logging.debug("file removed from {0}".format(os.environ["ORGN"]))
             print("file removed from {0}".format(os.environ["ORGN"]))                  
-        elif nfile < os.environ['NMAX']:
+        elif nfile < os.environ['FILEMAXN']:
             logging.debug("Multiple files in {0} ({1} total). Attempt to copy {2} to {3}.".format(os.environ["ORGN"], nfile,
                                                                                                   firstfile, os.environ["DSTN"]))
             #Transfer the file from src path to dest path 
@@ -58,8 +58,8 @@ def move_file():
             logging.debug("file removed from {0}. There are {1} files remaining.".format(os.environ["ORGN"],nfile-1))
             #MOVE NEXT FILE? (call this function again?)
         else :
-            logging.debug("Greater than {0} files".format(os.environ('NMAX')))
-            print("Greater than {0} files".format(os.environ('NMAX')))                          
+            logging.debug("Greater than {0} files".format(os.environ('FILEMAXN')))
+            print("Greater than {0} files".format(os.environ('FILEMAXN')))                          
             #DELETE ALL FILES IN ORIGIN?
     return
 
